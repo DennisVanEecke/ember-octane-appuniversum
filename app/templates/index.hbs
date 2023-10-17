@@ -1,0 +1,125 @@
+<AuHeading @level="1" @skin="1">
+  Test page
+</AuHeading>
+<AuCard
+  @shadow="true"
+  as |card|
+>
+  <card.header>
+    <AuHeading @level="2" @skin="4">
+      Test page reactive
+    </AuHeading>
+    <p>This part should demonstrate reactivity</p>
+  </card.header>
+  <card.content>
+    <AuButton @skin="primary" {{on "click" this.handleAction}}>
+      Action
+    </AuButton>
+    {{this.trackedValue}}&nbsp;{{this.autoUpdateGetter}}
+  </card.content>
+</AuCard>
+<form id="test-form" {{on "submit" this.handleSubmit}}>
+  <AuCard
+    @shadow="true"
+    as |card|
+  >
+    <card.header>
+      <AuHeading @level="2" @skin="4">
+        Test form
+      </AuHeading>
+      <p>This form should demonstrate how async tasks en tracked tasks are to be used</p>
+    </card.header>
+    <card.content>
+      <FormItem
+        @required="true"
+        @errorMessage={{this.validationErrors.ip}}
+        @warningMessage={{this.validationWarnings.ip}}
+      >
+        <:label>IP address</:label>
+        <:content as |validation|>
+          <AuInput
+            @error={{validation.error}}
+            @warning={{unless validation.error validation.warning}}
+            @disabled={{this.isLoading}}
+            value={{this.dummyObject.ip}}
+            {{on "change" this.handleIpChange}}
+            id="ip-address"
+          />
+        </:content>
+      </FormItem>
+      <FormItem
+        @required="true"
+        @errorMessage={{this.validationErrors.company}}
+        @warningMessage={{this.validationWarnings.company}}
+      >
+        <:label>Select a famous company</:label>
+        <:content as |validation|>
+          <ValidatedPowerSelect
+            @error={{validation.error}}
+            @warning={{unless validation.error validation.warning}}
+            @searchEnabled={{false}}
+            @allowClear={{true}}
+            @loadingMessage="Loading companies..."
+            @placeHolder="Select a company"
+            @onChange={{this.handleWidgetChange}}
+            @options={{this.famousBrandsTask.value}}
+            @selected={{this.selectedWidget}}
+            @disabled={{this.isLoading}}
+            as |widget|
+          >
+            {{widget.text}} ({{widget.randomNumber}})
+          </ValidatedPowerSelect>
+        </:content>
+      </FormItem>
+      <FormItem
+        @required="true"
+        @errorMessage={{this.validationErrors.word}}
+        @warningMessage={{this.validationWarnings.word}}
+      >
+        <:label>Select a word from the English dictionary (References to poop discouraged)</:label>
+        <:content as |validation|>
+          <ValidatedPowerSelect
+            @error={{validation.error}}
+            @warning={{unless validation.error validation.warning}}
+            @searchEnabled={{true}}
+            @allowClear={{true}}
+            @loadingMessage="Loading words..."
+            @placeHolder="Select a word"
+            @onChange={{this.handleWordChange}}
+            @search={{this.handleWordSearch}}
+            @options={{this.wordOptions}}
+            @selected={{this.dummyObject.word}}
+            @disabled={{this.wordsLoading}}
+            as |word|
+          >
+            {{word}}
+          </ValidatedPowerSelect>
+        </:content>
+      </FormItem>
+    </card.content>
+    <card.footer>
+      <AuButton @skin="primary" @loading={{this.isLoading}} type="submit">
+        Save
+      </AuButton>
+      <AuButton @skin="secondary" @loading={{this.isLoading}}>
+        Cancel
+      </AuButton>
+    </card.footer>
+  </AuCard>
+</form>
+
+<AuModal
+  @modalOpen={{this.showWarningModal}}
+  @closable={{false}}
+>
+  <:title>There are warnings</:title>
+  <:body>Some fields in the form have warnings. Are you sure you want to continue?</:body>
+  <:footer>
+      <AuButton @skin="primary" {{on "click" this.handleWarningModalOK}}>
+        Yes
+      </AuButton>
+      <AuButton @skin="secondary" {{on "click" this.handleWarningModalBack}}>
+        Back
+      </AuButton>
+  </:footer>
+</AuModal>

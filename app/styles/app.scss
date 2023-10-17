@@ -1,0 +1,9 @@
+/* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+@import "ember-power-select";
+@import "ember-appuniversum";
+
+// Shame
+.ember-power-select--warning .ember-power-select-trigger {
+  border: 0.3rem solid var(--au-orange-500);
+}
+

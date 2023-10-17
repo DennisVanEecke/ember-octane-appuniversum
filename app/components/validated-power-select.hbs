@@ -1,0 +1,20 @@
+<div class={{this.containerStyle}}>
+  <PowerSelect
+    @allowClear={{@allowClear}}
+    @searchEnabled={{@searchEnabled}}
+    @renderInPlace={{@renderInPlace}}
+    @loadingMessage={{@loadingMessage}}
+    @noMatchesMessage={{@noMatchesMessage}}
+    @placeholder={{@placeholder}}
+    @searchMessage={{@searchMessage}}
+    @onChange={{@onChange}}
+    @search={{@search}}
+    @options={{@options}}
+    @selected={{@selected}}
+    @triggerId={{@triggerId}}
+    @disabled={{@disabled}}
+    as |powerselect|
+  >
+    {{yield powerselect}}
+  </PowerSelect>
+</div>

@@ -1,7 +1,10 @@
 {{page-title "EmberOctane"}}
-
-{{! The following component displays Ember's default welcome message. }}
-<WelcomePage />
-{{! Feel free to remove this! }}
-
-{{outlet}}
+<AuApp>
+  <AuContentHeader @titlePartOne="Ember Octane" @titlePartTwo="With appuniversum" @pictureSize="default">
+    <img sizes="50vw" src="/images/loket-header-1600.jpg" alt="Voorbeeld foto">
+  </AuContentHeader>
+  <AuBodyContainer @scroll={{true}}>
+    {{outlet}}
+  </AuBodyContainer>
+</AuApp>`
+<AuModalContainer />
