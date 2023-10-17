@@ -49,10 +49,7 @@ export default class IndexController extends Controller {
   }
 
   get isLoading() {
-    // For some reason the notation below messes with my language server?
-    //return this.famousBrandsTask.isRunning || this.saveTask?.isRunning;
-    if (this.famousBrandsTask.isRunning) return true;
-    return this.saveTask ? this.saveTask.isRunning : true;
+    return this.famousBrandsTask.isRunning || this.saveTask?.isRunning;
   }
 
   get selectedWidget() {
